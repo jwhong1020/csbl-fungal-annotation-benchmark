@@ -1,5 +1,5 @@
 # 목표
-**BRAKER4로 annotation 완료된 데이터에서 다음과 같은 서열을 검색하여 annotation data의 상태 확인**
+**BRAKER4로 annotation 완료된 데이터에서 특정 서열을 검색하여 annotation data의 상태 확인**
 * luz gene block(발광 유전자) 구성요소
    * cph,hisps,h3h,luz
 * illudin S 생합성에 사용되는 Omp4 gene cluster내의 유전자들
