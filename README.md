@@ -51,14 +51,14 @@ Differential expression analysis and co-expression analysis address different qu
 Genes supported by both analyses will be prioritized as candidate genes associated with variation in fungal bioluminescence.
 
 ## Current status
-BRAKER4 annotation of the bioluminescent fungus: completed
-Available RNA-seq data for the current annotation: one sample
-FunGAP annotation of the bioluminescent fungus: planned
-Helixer annotation of the bioluminescent fungus: planned
-BRAKER4, FunGAP, and Helixer annotation of S288C: planned
-Annotation comparison: planned
-Final annotation selection: planned
-DEG analysis: planned
-Co-expression analysis: planned
+BRAKER4 annotation of the bioluminescent fungus: completed  
+Available RNA-seq data for the current annotation: one sample  
+FunGAP annotation of the bioluminescent fungus: planned  
+Helixer annotation of the bioluminescent fungus: planned  
+BRAKER4, FunGAP, and Helixer annotation of S288C: planned  
+Annotation comparison: planned  
+Final annotation selection: planned  
+DEG analysis: planned  
+Co-expression analysis: planned    
 
 The currently available single RNA-seq sample can be used as evidence for genome annotation. Additional RNA-seq samples representing multiple conditions, time points, or luminescence states are required for differential expression and co-expression analyses.
