@@ -10,8 +10,14 @@
 * **O.olearus**: NCBI 내 luz gene(hisps 등) 데이터 존재하지 않음 -> 사용불가
 * **Neonothopanus nambi**: O.japonicus genome의 luz gene 분석한 논문에서 차용됨. 이 생물로 검색 수행함
 
-# 분석 과정 및 도구
+# workflow 및 사용 도구
+BRAKER4로 생성된 아미노산 서열
+-> NCBI에서 찾고자 하는 gene들의 아미노산 서열 검색
+-> BLASTP에 BRAKER4 데이터와 NCBI에서 찾은 데이터를 넣고, 해당 아미노산 서열이 존재하는지 판별
+
+
 
 # 분석 과정 중 사용된 데이터
+
 
 # 결과 정리
