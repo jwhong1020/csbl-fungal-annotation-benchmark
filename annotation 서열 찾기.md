@@ -6,9 +6,9 @@
    * Omp4, cyp450, GATase1 anthranilate synthase, N-acetyltransferase, oxidoreductase, Omethyltransferase, Polygalactonurase
 * OphMA 존재하는지 확인
 
-**refrence 생물**\
-* O.olearus: NCBI 내 luz gene 데이터 존재하지 않음 -> 사용불가\
-* Neonothopanus nambi: O.japonicus genome의 luz gene 분석한 논문에서 차용됨. 이 생물로 검색 수행함
+**refrence 생물**
+* **O.olearus**: NCBI 내 luz gene 데이터 존재하지 않음 -> 사용불가
+* **Neonothopanus nambi**: O.japonicus genome의 luz gene 분석한 논문에서 차용됨. 이 생물로 검색 수행함
 
 # 분석 과정 및 도구
 
