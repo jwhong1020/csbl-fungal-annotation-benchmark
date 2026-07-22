@@ -1,0 +1,9 @@
+data/*.fastq
+data/*.fastq.gz
+data/*.bam
+data/*.sam
+data/*.fasta
+data/*.fa
+data/*.gff3
+output/
+logs/
