@@ -18,10 +18,10 @@ BRAKER4로 생성된 아미노산 서열\
 
 
 # 분석 과정 중 사용된 데이터
-## Neonothopanus nambi 유전체 데이터
-[CPH](./N_nambi_CPH.md)
-[HispS](./N_nambi_HipS.md)
-[h3h](./N_nambi_h3h.md)
+### Neonothopanus nambi 유전체 데이터
+[CPH](./N_nambi_CPH.md)\
+[HispS](./N_nambi_HipS.md)\
+[h3h](./N_nambi_h3h.md)\
 [luz](./N_nambi_luz.md)
 
 # 결과 정리
