@@ -67,6 +67,7 @@ Co-expression indicates statistical similarity between expression profiles. It d
 3. Helixer annotation: planned  
 4. Comparison with the established reference annotation: planned  
 # Analysis workflow  
+```text
 Genome assembly  
     ├── BRAKER4
     ├── FunGAP
@@ -88,7 +89,7 @@ co-expression analysis
             ▼
 Candidate gene prioritization
 Co-expression analysis
-
+```
 Gene expression will be quantified across multiple biological samples, conditions, or time points.
 
 Possible co-expression approaches include:
