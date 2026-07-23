@@ -27,9 +27,27 @@ BRAKER4로 생성된 아미노산 서열(braker.aa)
 [h3h](./N_nambi_h3h.md)\
 [luz](./N_nambi_luz.md)
 
+# 분석 과정
+1. 데이터 준비 및 BLAST DB 구축
+가장 먼저 비교의 기준이 될 Query 서열(N.nambi)과 검색 대상이 될 DB 서열(O. japonicus)을 준비
+1) Reference 서열(Query) 준비
+NCBI Protein 데이터베이스에서 타겟 유전자 아미노산 서열 검색 및 다운로드\
+
+2) BLAST DB 생성
+터미널을 열고 BRAKER4 결과 파일이 있는 경로로 이동한 뒤, 아래 명령어를 입력하여 BLAST용 데이터베이스를 만듦(**braker.aa 사용**)
+```Bash
+makeblastdb -in braker.aa -dbtype prot -out O_japonicus_db
+```
+
+
+2. BLASTP 검색 수행
+```Bash
+# luz gene (cph,hisps,h3h,luz)
+blastp -query N_nambi_bioluminescence_proteins.faa -db /panpyro/bravo/swkim/2019-nibr-biolum/LYS/output/O_japonicus/results/O_japonicus_db -evalue 1e-10 -out assembly_blast_luz.txt
+```
+
+3. 결과 해석
+
+
 # 결과 정리
-## 중요 데이터 및 해석 방법
 
-
-
-## 결과
