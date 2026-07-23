@@ -32,4 +32,12 @@ Helixer.py --lineage land_plant --fasta-path Arabidopsis_lyrata.v.1.0.dna.chromo
   --species Arabidopsis_lyrata --gff-output-path Arabidopsis_lyrata_chromosome8_helixer.gff3
 ```
 
+**1-step inference parameters**
+|Parameter|Default|Explanation|
+|:---|:---:|:---:|
+|--fasta-path|/|FASTA input file|
+|--gff-output-path|/|Output GFF3 file path|
+|--species|/|Species name. Will be added to the GFF3 file.|
+|--lineage|/|What model to use for the annotation. Options are: vertebrate, land_plant, fungi or invertebrate.|
+
 ### BUSCO 평가
