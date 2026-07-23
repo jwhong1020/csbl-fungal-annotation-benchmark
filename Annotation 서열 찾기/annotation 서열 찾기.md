@@ -43,14 +43,23 @@ makeblastdb -in braker.aa -dbtype prot -out O_japonicus_db
 
 2. BLASTP 검색 수행
 ```Bash
-# luz gene (cph,hisps,h3h,luz)
+# luz gene (cph,hisps,h3h,luz) 검색
 blastp -query N_nambi_bioluminescence_proteins.faa -db /panpyro/bravo/swkim/2019-nibr-biolum/LYS/output/O_japonicus/results/O_japonicus_db -outfmt "6 qseqid sseqid pident qcovs evalue" -evalue 1e-10 -out final_blast.txt
 ```
-```
+
+```Bash
+# Best Hit 결과만 보기
 (echo -e "Target_Gene\tO.japonicus_Gene\tIdentity(%)\tCoverage(%)\tE-value"; sort -k1,1 -k5,5g final_blast.txt | awk '!seen[$1]++') | column -t
 ```
 
-3. 결과 해석
+3. 결과
+```text
+Target_Gene                 O.japonicus_Gene  Identity(%)  Coverage(%)  E-value
+sp|A0A3G9JYH7.1|LUZ_NEONM   g185.t1           84.483       87           7.67e-150
+sp|A0A3G9JYJ6.1|CPH_NEONM   g12257.t1         62.963       97           1.62e-128
+sp|A0A3G9K3K9.1|HIPS_NEONM  g243.t1           75.027       54           0.0
+sp|A0A3G9K5C8.1|H3H_NEONM   g186.t1           62.061       100          0.0
+```
 
 
 # 결과 정리
