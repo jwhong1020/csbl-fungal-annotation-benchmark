@@ -30,6 +30,7 @@ BRAKER4로 생성된 아미노산 서열(braker.aa)
 # 분석 과정
 1. 데이터 준비 및 BLAST DB 구축
 가장 먼저 비교의 기준이 될 Query 서열(N.nambi)과 검색 대상이 될 DB 서열(O. japonicus)을 준비
+
 1) Reference 서열(Query) 준비
 NCBI Protein 데이터베이스에서 타겟 유전자 아미노산 서열 검색 및 다운로드\
 
@@ -43,7 +44,10 @@ makeblastdb -in braker.aa -dbtype prot -out O_japonicus_db
 2. BLASTP 검색 수행
 ```Bash
 # luz gene (cph,hisps,h3h,luz)
-blastp -query N_nambi_bioluminescence_proteins.faa -db /panpyro/bravo/swkim/2019-nibr-biolum/LYS/output/O_japonicus/results/O_japonicus_db -evalue 1e-10 -out assembly_blast_luz.txt
+blastp -query N_nambi_bioluminescence_proteins.faa -db /panpyro/bravo/swkim/2019-nibr-biolum/LYS/output/O_japonicus/results/O_japonicus_db -outfmt "6 qseqid sseqid pident qcovs evalue" -evalue 1e-10 -out final_blast.txt
+```
+```
+(echo -e "Target_Gene\tO.japonicus_Gene\tIdentity(%)\tCoverage(%)\tE-value"; sort -k1,1 -k5,5g final_blast.txt | awk '!seen[$1]++') | column -t
 ```
 
 3. 결과 해석
