@@ -1,7 +1,7 @@
 # Helixer Gene Prediction Summary
 ## Analysis overview
-Helixer는 gff 파일 이외의 Gene prediction 결과 파일과 BUSCO 파일을 생성하지 않음.\ 
-따라서 타 프로그램과 비교하기 위해서는 다른 분석 프로그램에 결과로 나온 gff 파일을 넣어야 함.\
+Helixer는 gff 파일 이외의 Gene prediction 결과 파일과 BUSCO 파일을 생성하지 않음. 
+따라서 타 프로그램과 비교하기 위해서는 다른 분석 프로그램에 결과로 나온 gff 파일을 넣어야 함.
 본 Summary에서는 GFF전용 통계 도구인 AGAT와 BUSCO를 사용하여 추가적으로 분석하였음
 
 ## Gene prediction results (AGAT)
