@@ -46,6 +46,19 @@ Helixer.py --lineage land_plant --fasta-path Arabidopsis_lyrata.v.1.0.dna.chromo
 |--species|/|Species name. Will be added to the GFF3 file.|
 |--lineage|/|What model to use for the annotation. Options are: vertebrate, land_plant, fungi or invertebrate.|
 
+### AGAT 분석
+Helixer는 따로 유전자 예측 통계를 보여주지 않음. 따라서 output으로 나오는 `gff`파일을 AGAT에 넣어 통계를 생성해야함
+```Bash
+#1 AGAT 설치 및 환경 설정
+conda create -n agat_env
+conda install -c bioconda agat -y
+
+#2 통계 리포트 생성 명령어 실행
+agat_sq_stat_basic.pl -i PATH_to_gff3 > helixer_gene_stats.txt
+
+#3 결과물 확인
+cat helixer_gene_stats.txt
+```
 
 ### BUSCO 평가
 Helixer는 따로 BUSCO 평가를 수행하지 않음. 따라서 타 프로그램과의 성능을 비교하기 위해서는 따로 BUSCO를 수행해야함.
