@@ -6,6 +6,27 @@ Helixer는 `gff` 이외의 Gene prediction 결과 파일과 BUSCO 파일을 생�
 
 ## Gene prediction results (AGAT)
 
+| Metric                  |         Result |
+| ----------------------- | -------------: |
+| Genes                   |         15,304 |
+
+
+### 결과(text)
+```text
+Reading /panpyro/bravo/swkim/2019-nibr-biolum/analysis/helixer/Omphalotus_japonicus_helixer.gff3
+258492 line to process...
+
+Progress : 100 %
+Type (3rd column)	Number	Size total (kb)	Size mean (bp)	/!\Results are rounding to two decimal places 
+cds	95234	18975.94	199.26
+exon	98706	22324.26	226.17
+five_prime_utr	17311	1412.26	81.58
+gene	15304	27803.68	1816.76
+mrna	15304	27803.68	1816.76
+three_prime_utr	16567	1936.06	116.86
+Total	258426	100255.88	387.95
+Job done in 10 seconds
+```
 
 ## Completeness assessment (BUSCO)
 | Dataset  | Tool      | Complete | Fragmented | Missing |
