@@ -54,6 +54,7 @@ blastp -query N_nambi_bioluminescence_proteins.faa -db /panpyro/bravo/swkim/2019
 
 3. 결과
 ```text
+# luz gene
 Target_Gene                 O.japonicus_Gene  Identity(%)  Coverage(%)  E-value
 sp|A0A3G9JYH7.1|LUZ_NEONM   g185.t1           84.483       87           7.67e-150
 sp|A0A3G9JYJ6.1|CPH_NEONM   g12257.t1         62.963       97           1.62e-128
