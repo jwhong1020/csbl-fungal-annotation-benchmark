@@ -28,3 +28,8 @@ BRAKER4로 생성된 아미노산 서열(braker.aa)
 [luz](./N_nambi_luz.md)
 
 # 결과 정리
+## 중요 데이터 및 해석 방법
+
+
+
+## 결과
