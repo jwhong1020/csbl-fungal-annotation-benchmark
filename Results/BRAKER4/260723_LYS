@@ -1,0 +1,67 @@
+# BRAKER4 Gene Prediction Summary
+
+## Analysis overview
+
+* Sample: `assembly.fasta`
+* Pipeline: BRAKER4 v0.5.0-beta
+* Mode: ETP/BRAKER3
+* Evidence: RNA-Seq + protein
+* BUSCO lineage: `fungi_odb12`
+* Runtime: 4.5 h(wall clock time), 30.9h(CPU time)
+
+## Methods
+
+Genome repeats were soft-masked using RepeatModeler2, RepeatMasker, and Tandem Repeats Finder. RNA-Seq reads were aligned to the genome using HISAT2. GeneMark-ETP and AUGUSTUS were used for gene prediction, and the results were integrated using TSEBRA. Missing conserved genes were rescued using `best_by_compleasm`. UTRs were added using StringTie2, and the final annotation was converted to GFF3 format using AGAT.
+
+## Gene prediction results
+
+``` text
+BRAKER4 Gene Set Statistics
+==================================================
+
+Genes:                    14,389
+Transcripts:              16,774
+Mean transcripts/gene:      1.17
+Mean exons/transcript:      7.06
+
+Single-exon transcripts:   1,286 (7.7%)
+Multi-exon transcripts:   15,488 (92.3%)
+
+Mean CDS length:           1,233 bp
+Mean genomic span:         1,672 bp
+Median CDS length:           993 bp
+Median genomic span:       1,351 bp
+```
+GeneMark-ETP initially predicted 11,992 genes, while AUGUSTUS predicted 14,334 genes.\
+After integration, BUSCO rescue, internal stop codon filtering, and CDS normalization, the final gene set contained 14,389 genes and 16,774 transcripts.
+
+## Completeness assessment
+
+| Dataset  | Tool      | Complete | Fragmented | Missing |
+| -------- | --------- | -------: | ---------: | ------: |
+| Genome   | BUSCO     |    98.8% |       0.2% |    1.0% |
+| Genome   | compleasm |    99.2% |       0.5% |    0.4% |
+| Proteome | BUSCO     |    91.5% |       5.2% |    3.3% |
+| Proteome | compleasm |    92.3% |       5.0% |    2.7% |
+
+The genome assembly showed high completeness, with approximately 99% of conserved fungal genes detected.\
+Proteome completeness was lower at approximately 92%, indicating that some conserved genes present in the genome may not have been completely reconstructed in the predicted gene models.
+
+Compleasm reported a high duplicated BUSCO proportion in the proteome. 
+This should be re-evaluated using one representative protein isoform per gene because `braker.aa` may contain multiple transcript isoforms from the same locus.
+
+## Main output files
+
+| File                  | Description                         |
+| --------------------- | ----------------------------------- |
+| `braker.gff3.gz`      | Final structural annotation         |
+| `braker.gtf.gz`       | Final gene prediction in GTF format |
+| `braker.aa.gz`        | Predicted protein sequences         |
+| `braker.codingseq.gz` | Predicted CDS sequences             |
+| `braker_utr.gtf.gz`   | Gene models with UTRs               |
+| `gene_support.tsv`    | Per-gene evidence support           |
+| `hintsfile.gff.gz`    | RNA-Seq and protein evidence hints  |
+
+## Comparison with Omphalotus guepiniiformis genome in NCBI
+accession code : PRJNA886877
+(Analysis planned)
