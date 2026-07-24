@@ -90,6 +90,8 @@ To reduce redundancy caused by alternative transcript isoforms, the longest prot
 The representative protein dataset contains one protein sequence per gene, corresponding to the longest isoform among predicted transcripts.
 
 ## BUSCO Assessment
+Used fungi_odb 12 as BRAKER4 did.
+
 | Dataset | Complete | Single-copy | Duplicated | Fragmented | Missing |
 | ------------------------ | -------- | ----------- | ---------- | ---------- | ------- |
 | All isoforms | 58.6% | 44.4% | 14.3% | 16.6% | 24.8% |
