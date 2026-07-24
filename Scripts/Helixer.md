@@ -34,8 +34,17 @@ singularity run --nv helixer-docker_latest.sif Helixer.py \
 
 ```Bash
 # 구동코드 (fa to gff3)
-Helixer.py --lineage land_plant --fasta-path Arabidopsis_lyrata.v.1.0.dna.chromosome.8.fa.gz  \
-  --species Arabidopsis_lyrata --gff-output-path Arabidopsis_lyrata_chromosome8_helixer.gff3
+# 따로 CPU 코어수 지정 옵션 없음. singluarity에 taskset 옵션 사용해서 코어 수 지정
+# bind 옵션을 사용해 상위 폴더를 지정해야 프로그램이 하위 폴더들을 인식할 수 있음.
+#input PATH-to-assembly.fasta
+#OUTPUT PATH-to-analysis/helixer
+
+taskset -c 0-20 singularity run \
+    --bind PATH_to_2019-nibr-biolum \
+    helixer-docker_latest.sif Helixer.py \
+    --fasta-path PATH_to_assembly.fasta \
+    --lineage fungi \
+    --gff-output-path PATH_to_helixer/Omphalotus_japonicus_helixer.gff3
 ```
 
 **1-step inference parameters**
