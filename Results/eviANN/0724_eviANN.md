@@ -49,6 +49,8 @@ EviAnn was run using 16 threads with debug and verbose logging enabled.
 | Exons per transcript       | To be calculated |
 | Single-exon transcripts    | To be calculated |
 
+### 2. BUSCO
+
 ### Main output files
 | File                                      | Description                                |
 | ----------------------------------------- | ------------------------------------------ |
