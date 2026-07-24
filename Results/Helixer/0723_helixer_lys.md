@@ -31,24 +31,25 @@ Job done in 10 seconds
 ## Completeness assessment (BUSCO)
 | Dataset  | Tool      | Complete | Fragmented | Missing |
 | -------- | --------- | -------: | ---------: | ------: |
-| Proteome   | BUSCO     |    90.2% |       4.0% |    5.8% |
+| Proteome   | BUSCO     |    88.1% |       7.8% |    4.0% |
 
 ### 결과(text)
 ```text
 # BUSCO version is: 6.1.0 
-# The lineage dataset is: fungi_odb10 (Creation date: 2024-01-08, number of genomes: 549, number of BUSCOs: 758)
+# The lineage dataset is: fungi_odb12 (Creation date: 2026-05-22, number of genomes: 144, number of BUSCOs: 1122)
 # BUSCO was run in mode: proteins
 
 	***** Results: *****
 
-	C:90.2%[S:89.2%,D:1.1%],F:4.0%,M:5.8%,n:758	   
-	684	Complete BUSCOs (C)			   
-	676	Complete and single-copy BUSCOs (S)	   
-	8	Complete and duplicated BUSCOs (D)	   
-	30	Fragmented BUSCOs (F)			   
-	44	Missing BUSCOs (M)			   
-	758	Total BUSCO groups searched		   
+	C:88.1%[S:86.9%,D:1.2%],F:7.8%,M:4.0%,n:1122	   
+	989	Complete BUSCOs (C)			   
+	975	Complete and single-copy BUSCOs (S)	   
+	14	Complete and duplicated BUSCOs (D)	   
+	88	Fragmented BUSCOs (F)			   
+	45	Missing BUSCOs (M)			   
+	1122	Total BUSCO groups searched		   
 
 Dependencies and versions:
 	hmmsearch: 3.4
+
 ```
