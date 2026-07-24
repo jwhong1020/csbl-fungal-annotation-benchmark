@@ -56,7 +56,9 @@ taskset -c 0-20 singularity run \
 |--lineage|/|What model to use for the annotation. Options are: vertebrate, land_plant, fungi or invertebrate.|
 
 ## AGAT 분석
-Helixer는 따로 유전자 예측 통계를 보여주지 않음. 따라서 output으로 나오는 `gff`파일을 AGAT에 넣어 통계를 생성해야함
+Helixer는 따로 유전자 예측 통계를 보여주지 않음. 따라서 output으로 나오는 `gff`파일을 AGAT에 넣어 통계를 생성해야함. AGAT는 유전자 annotation을 통해 생성된 `gff` `gtf` 파일을 다양하게 수정 및 분석가능한 프로그램.
+
+
 ```Bash
 #1 AGAT 설치 및 환경 설정
 conda create -n agat_env
