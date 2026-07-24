@@ -31,7 +31,7 @@ Job done in 10 seconds
 ## Completeness assessment (BUSCO)
 | Dataset  | Tool      | Complete | Fragmented | Missing |
 | -------- | --------- | -------: | ---------: | ------: |
-| Proteome   | BUSCO     |    88.1% |       7.8% |    4.0% |
+| Proteome   | BUSCO     |    88.1% |      7.8% |    4.0% |
 
 ### 결과(text)
 ```text
