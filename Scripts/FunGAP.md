@@ -29,15 +29,15 @@ AUGUSTUS species model result = coprinus_cinereus
 6. Final run
    ```text
    singularity exec \
-  --bind ${PROJECT_DIR}:/project \
-  ${PROJECT_DIR}/software/FunGAP/docker/sandbox \
-  /workspace/FunGAP/fungap.py \
-  --output_dir /project/analysis/fungap/output \
-  --trans_read_1 /project/fastpQC_1.fastq.gz \
-  --trans_read_2 /project/fastpQC_2.fastq.gz \
-  --genome_assembly /project/NIBRbiolumScaffold.fa \
-  --augustus_species coprinus_cinereus \
-  --sister_proteome /project/prot_db.faa \
-  --num_cores 25 \
-  --busco_dataset fungi_odb12.2
+     --bind ${PROJECT_DIR}:/project \
+     ${PROJECT_DIR}/software/FunGAP/docker/sandbox \
+     /workspace/FunGAP/fungap.py \
+     --output_dir /project/analysis/fungap/output \
+     --trans_read_1 /project/fastpQC_1.fastq.gz \
+     --trans_read_2 /project/fastpQC_2.fastq.gz \
+     --genome_assembly /project/NIBRbiolumScaffold.fa \
+     --augustus_species coprinus_cinereus \
+     --sister_proteome /project/prot_db.faa \
+     --num_cores 25 \
+     --busco_dataset fungi_odb12.2
   ```
