@@ -26,7 +26,7 @@
 | Single-exon transcripts | 820 |
 | Multi-exon transcripts | 12,288 |
 
-#### test
+#### text
 ```txt
 Reading file annevo_completed.gff3
 Parsing Finished
