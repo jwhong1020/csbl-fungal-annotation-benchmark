@@ -2,7 +2,7 @@
 
 ## Analysis overview
 - **Sample:** NIBR_biolum
-- **Pipeline:** EviAnn v2.0.5
+- **Pipeline:** ANNEVO
 - **Threads:** 16
 - **Genome:** `assembly.fa`
 - **RNA-Seq evidence:** Paired-end RNA-Seq
