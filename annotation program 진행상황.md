@@ -4,4 +4,4 @@
 |2026-07-21|Run (~5 hours)|||||||
 |2026-07-22||Run(error)||Run(19.44min)||||
 |2026-07-23||re-RUN(error)||||||
-|2026-07-24|||Run (1hr 25min)|||Run(12.72min - ab initio), Run(54.3min - Fungi.fa evidence)||
+|2026-07-24|||Run (1hr 25min)||Run(12.72min - ab initio), Run(54.3min - Fungi.fa evidence)|Run(12.34min)||
