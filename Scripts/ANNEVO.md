@@ -38,4 +38,14 @@ python annotation.py \
     -t 25  # THREADS 지정
 ```
 
+### AGAT
+유전자에 대한 통계가 따로 나오지 않으므로 AGAT 프로그램을 사용하여 통계를 생성한다.
+
+```Bash
+#GFF3 파일 표준화 및 교정
+agat_convert_sp_gxf2gxf.pl -g Omphalotus_japonicus_annevo.gff3 -o annevo_completed.gff3
+
+#통계 리포트 추출
+agat_sp_statistics.pl -i annevo_completed.gff3 > annevo_gene_stats.txt
+```
 
