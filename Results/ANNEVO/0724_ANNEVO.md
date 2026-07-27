@@ -13,6 +13,125 @@
 | Genome assembly | `assembly.fasta` |
 | model | `ANNEVO_Fungi` |
 
+## Gene prediction results
+
+| Metric | Result |
+| --- | ---: |
+| Gene models | 13,108 |
+| Transcripts | 13,108 |
+| Transcripts per gene | 1.00 |
+| Exons | 84,564 |
+| CDS features | ? |
+| Mean exons per transcript | 6.5 |
+| Single-exon transcripts | 820 |
+| Multi-exon transcripts | 12,288 |
+
+#### test
+```txt
+Reading file annevo_completed.gff3
+Parsing Finished
+Compute statistics
+Bye Bye.
+--------------------------------------------------------------------------------
+
+Compute mrna with isoforms if any
+
+Number of genes                              13108
+Number of mrnas                              13108
+Number of cdss                               13108
+Number of exons                              84564
+Number of exon in cds                        84564
+Number of intron in cds                      71456
+Number of intron in exon                     71456
+Number gene overlapping                      57
+Number of single exon gene                   820
+Number of single exon mrna                   820
+mean mrnas per gene                          1.0
+mean cdss per mrna                           1.0
+mean exons per mrna                          6.5
+mean exons per cds                           6.5
+mean introns in cdss per mrna                5.5
+mean introns in exons per mrna               5.5
+Total gene length                            20980727
+Total mrna length                            20980727
+Total cds length                             16758855
+Total exon length                            16758855
+Total intron length per cds                  4221872
+Total intron length per exon                 4221872
+mean gene length                             1600
+mean mrna length                             1600
+mean cds length                              1278
+mean exon length                             198
+mean cds piece length                        198
+mean intron in cds length                    59
+mean intron in exon length                   59
+Longest gene                                 11977
+Longest mrna                                 11977
+Longest cds                                  10713
+Longest exon                                 4010
+Longest cds piece                            4010
+Longest intron into cds part                 1984
+Longest intron into exon part                1984
+Shortest gene                                21
+Shortest mrna                                21
+Shortest cds                                 21
+Shortest exon                                2
+Shortest cds piece                           2
+Shortest intron into cds part                20
+Shortest intron into exon part               20
+
+Re-compute mrna without isoforms asked. We remove shortest isoforms if any
+
+Number of genes                              13108
+Number of mrnas                              13108
+Number of cdss                               13108
+Number of exons                              84564
+Number of exon in cds                        84564
+Number of intron in cds                      71456
+Number of intron in exon                     71456
+Number gene overlapping                      57
+Number of single exon gene                   820
+Number of single exon mrna                   820
+mean mrnas per gene                          1.0
+mean cdss per mrna                           1.0
+mean exons per mrna                          6.5
+mean exons per cds                           6.5
+mean introns in cdss per mrna                5.5
+mean introns in exons per mrna               5.5
+Total gene length                            20980727
+Total mrna length                            20980727
+Total cds length                             16758855
+Total exon length                            16758855
+Total intron length per cds                  4221872
+Total intron length per exon                 4221872
+mean gene length                             1600
+mean mrna length                             1600
+mean cds length                              1278
+mean exon length                             198
+mean cds piece length                        198
+mean intron in cds length                    59
+mean intron in exon length                   59
+Longest gene                                 11977
+Longest mrna                                 11977
+Longest cds                                  10713
+Longest exon                                 4010
+Longest cds piece                            4010
+Longest intron into cds part                 1984
+Longest intron into exon part                1984
+Shortest gene                                21
+Shortest mrna                                21
+Shortest cds                                 21
+Shortest exon                                2
+Shortest cds piece                           2
+Shortest intron into cds part                20
+Shortest intron into exon part               20
+
+--------------------------------------------------------------------------------
+
+
+```
+
+
 ## BUSCO Assessment
 Used fungi_odb 12
 | Dataset | Complete | Single-copy | Duplicated | Fragmented | Missing |
