@@ -16,7 +16,7 @@
     - **역할 (Mapping):** 잘게 쪼개진 RNA-seq 리드(Fastq)들을 레퍼런스 유전체(Fasta)의 어느 위치에서 떨어져 나왔는지 찾아내어 지도 위에 붙여줍니다.
     - **결과물:** 정렬된 좌표가 기록된 `BAM` 파일.
 2. **StringTie**
-    - **역할 (Assembly):** STAR가 유전체 위에 붙여놓은 RNA 리드들을 이어 붙여서, 실제 세포 내에 존재하는 '진짜 전사체(Evidence Transcript)의 형태'를 조립해 냅니다. 우리가 딥러닝 결과들과 비교할 '표준 유전체'를 만드는 역할입니다.
+    - **역할 (Assembly):** STAR가 유전체 위에 붙여놓은 RNA 리드들을 이어 붙여서, 실제 세포 내에 존재하는 '진짜 전사체(Evidence Transcript)의 형태'를 조립해 냅니다. Annotation 프로그램들의 결과와 비교할 '표준 유전체'를 만드는 역할입니다.
     - **결과물:** RNA-seq 증거로만 만들어진 `GTF/GFF3` 파일.
 3. **gffcompare**
     - **역할 (Benchmarking):** StringTie가 만든 정답지(실제 RNA)와, 각 예측 프로그램(Helixer, BRAKER4 등)이 만든 GFF3 파일을 겹쳐놓고 얼마나 일치하는지 채점합니다.
