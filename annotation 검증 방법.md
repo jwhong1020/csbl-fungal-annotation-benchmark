@@ -66,7 +66,6 @@ mapping 이름 뒤에 붙은 번호들은 sample들 뒤에 붙어있는 숫자�
 
 ```bash
 # 2. RNA-seq 데이터 매핑 (Pair-end 데이터 기준)
-# R1 파일 8개를 쉼표로 묶고, 한 칸 띄운 뒤 R2 파일 8개를 쉼표로 묶습니다. (띄어쓰기 주의!)
 STAR --runThreadN 25 \
      --genomeDir PATH_to-STAR_index/ \
      --readFilesIn Sample_1.fq.gz Sample_2.fq.gz \
@@ -74,7 +73,13 @@ STAR --runThreadN 25 \
      --outSAMtype BAM SortedByCoordinate \
      --outFileNamePrefix Path_to_STAR_mapping_results/mapping[숫자]_
 ```
+이제, 각 샘플 별 RNA_seq 데이터들을 이용하여 mapping을 진행합니다.
 
+각 8개의 mapping된 `BAM`파일들은 `mapping 1~8`로 명명되었으며 `STAR_mapping_results` 파일에 넣어두었습니다.
+
+⇒ **수정: Sample_TN1806R1898 서열이 잘못되어 제외하고 진행. 데이터는 7개만 만들었습니다(mapping1~7).**
+
+mapping 이름 뒤에 붙은 번호들은 sample들 뒤에 붙어있는 숫자들을 오름차순으로 배열하였을때의 순서와 동일합니다.
 
 ## StringTie
 
