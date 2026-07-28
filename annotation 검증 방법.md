@@ -22,3 +22,12 @@
     - **역할 (Benchmarking):** StringTie가 만든 정답지(실제 RNA)와, 각 예측 프로그램(Helixer, BRAKER4 등)이 만든 GFF3 파일을 겹쳐놓고 얼마나 일치하는지 채점합니다.
     - **결과물:** 정확도, 민감도 통계가 적힌 `.stats` 리포트 파일.
 
+# 진행 과정 및 사용 코드
+## STAR
+
+## StringTie
+
+## gffcompare
+
+
+# 분석 결과
