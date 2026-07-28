@@ -22,7 +22,7 @@
     - **역할 (Benchmarking):** StringTie가 만든 정답지(실제 RNA)와, 각 예측 프로그램(Helixer, BRAKER4 등)이 만든 GFF3 파일을 겹쳐놓고 얼마나 일치하는지 채점합니다.
     - **결과물:** 정확도, 민감도 통계가 적힌 `.stats` 리포트 파일.
 
-# 진행 과정 및 사용 코드
+# 진행 과정 및 사용 코드 (수정 중)
 ## 패지키 설치 및 환경 조성
 ```bash
 # Bioconda 채널 우선순위 설정(생략 가능)
@@ -44,6 +44,28 @@ gffcompare --version
 하단의 프로세스 진행시 `compare_env` 환경에서 진행하면 됩니다.
 
 ## STAR
+**1. 인덱스 생성**
+```bash
+# 1. 인덱스 생성 (한 번만 하면 됩니다)
+STAR --runThreadN 25 \
+     --runMode genomeGenerate \
+     --genomeDir ./STAR_index \ #STAR_index 안에 파일 생성
+     --genomeFastaFiles /PATH_게놈파일/assembly.fasta
+```
+`STAR_index` 폴더 안에 인덱스가 생성되었습니다. 이 인덱스는 polish 과정을 거치지 않은 데이터로 만든 것 입니다. 따라서 polish 이후 index를 다시 생성해야 한다면 다른 이름을 지정하고 여기에 기록으로 남겨주세요.
+
+**2. RNA-seq 데이터 매핑**
+
+```bash
+# 2. RNA-seq 데이터 매핑 (Pair-end 데이터 기준)
+# R1 파일 8개를 쉼표로 묶고, 한 칸 띄운 뒤 R2 파일 8개를 쉼표로 묶습니다. (띄어쓰기 주의!)
+STAR --runThreadN 32 \
+     --genomeDir ./STAR_index \
+     --readFilesIn sample1_R1.fq,sample2_R1.fq,...,sample8_R1.fq  sample1_R2.fq,sample2_R2.fq,...,sample8_R2.fq \
+     --outSAMtype BAM SortedByCoordinate \ 
+     --outFileNamePrefix All_samples_merged_
+```
+
 
 ## StringTie
 
