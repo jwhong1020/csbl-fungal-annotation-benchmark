@@ -55,15 +55,23 @@ STAR --runThreadN 25 \
 `STAR_index` 폴더 안에 인덱스가 생성되었습니다. 이 인덱스는 polish 과정을 거치지 않은 데이터로 만든 것 입니다. 따라서 polish 이후 index를 다시 생성해야 한다면 다른 이름을 지정하고 여기에 기록으로 남겨주세요.
 
 **2. RNA-seq 데이터 매핑**
+이제, 각 샘플 별 RNA_seq 데이터들을 이용하여 mapping을 진행합니다.
+
+각 8개의 mapping된 `BAM`파일들은 `mapping 1~8`로 명명되었으며 `STAR_mapping_results` 파일에 넣어두었습니다.
+
+mapping 이름 뒤에 붙은 번호들은 sample들 뒤에 붙어있는 숫자들을 오름차순으로 배열하였을때의 순서와 동일합니다. 예시: `~1891`로 끝나는 샘플의 mapping 데이터는 `mapping1`입니다.
+
+이 명명법은 이 후 과정을 for문으로 한번에 진행하기 위해 붙여졌습니다.
 
 ```bash
 # 2. RNA-seq 데이터 매핑 (Pair-end 데이터 기준)
 # R1 파일 8개를 쉼표로 묶고, 한 칸 띄운 뒤 R2 파일 8개를 쉼표로 묶습니다. (띄어쓰기 주의!)
-STAR --runThreadN 32 \
-     --genomeDir ./STAR_index \
-     --readFilesIn sample1_R1.fq,sample2_R1.fq,...,sample8_R1.fq  sample1_R2.fq,sample2_R2.fq,...,sample8_R2.fq \
-     --outSAMtype BAM SortedByCoordinate \ 
-     --outFileNamePrefix All_samples_merged_
+STAR --runThreadN 25 \
+     --genomeDir PATH_to-STAR_index/ \
+     --readFilesIn Sample_1.fq.gz Sample_2.fq.gz \
+     --readFilesCommand zcat \ #gz압축파일 읽어주는 명령어
+     --outSAMtype BAM SortedByCoordinate \
+     --outFileNamePrefix Path_to_STAR_mapping_results/mapping[숫자]_
 ```
 
 
