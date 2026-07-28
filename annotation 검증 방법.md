@@ -24,7 +24,7 @@
 
 # 진행 과정 및 사용 코드 (수정 중)
 ## 패지키 설치 및 환경 조성
-각 프로그램들의 환경 이름은 star__env stringtie_env gffcompare_env 입니다. 프로그램 사용 전 환경을 바꿔주세요.
+각 프로그램들의 환경 이름은 `star__env` `stringtie_env` `gffcompare_env` 입니다. 프로그램 사용 전 환경을 바꿔주세요.
 
 ```bash
 # Bioconda 채널 우선순위 설정(생략 가능)
