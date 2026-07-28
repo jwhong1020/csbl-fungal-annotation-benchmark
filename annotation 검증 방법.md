@@ -45,7 +45,8 @@ STAR --version
 stringtie --version
 gffcompare --version
 ```
-하단의 프로세스 진행시 `compare_env` 환경에서 진행하면 됩니다.
+
+
 
 ## STAR
 #### 1. 인덱스 생성
