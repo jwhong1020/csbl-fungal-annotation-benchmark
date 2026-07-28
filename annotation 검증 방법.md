@@ -23,6 +23,26 @@
     - **결과물:** 정확도, 민감도 통계가 적힌 `.stats` 리포트 파일.
 
 # 진행 과정 및 사용 코드
+## 패지키 설치 및 환경 조성
+```bash
+# Bioconda 채널 우선순위 설정(생략 가능)
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict #우선순위 적용 / 설치중 에러 방지
+
+#annotation compare 전용 환경 생성 및 패키지 일괄 설치
+conda create -n compare_env star stringtie gffcompare -y
+
+#설치 확인 및 버전 테스트
+conda activate compare_env
+
+STAR --version
+stringtie --version
+gffcompare --version
+```
+하단의 프로세스 진행시 `compare_env` 환경에서 진행하면 됩니다.
+
 ## STAR
 
 ## StringTie
