@@ -11,4 +11,4 @@
 |Date|BRAKER4|FunGAP|EviANN|Helixer|Tiberius|ANNEVO|Remarks|
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 ||||||||Download|
-|2026-07-28||||||||
+|2026-07-28||X|||ab initio running|||
