@@ -129,5 +129,58 @@ stringtie --merge -p 32 -o stringtie_merged_evidence.gtf mergelist.txt
 
 ## gffcompare
 
+```bash
+#!/bin/bash
+
+# 1. 기준이 되는 RNA-seq 정답지 (StringTie 결과물 경로 입력)
+REF_GTF="RNA_evidence_stringtie.gtf"
+
+# 2. 평가할 6개 프로그램의 GFF3 파일 목록 배열 (실제 파일 경로로 수정)
+GFF_FILES=(
+    "braker4.gff3"
+    "fungap.gff3"
+    "eviann.gff3"
+    "helixer_completed.gff3"
+    "tiberius.gff3"
+    "annevo.gff3"
+)
+
+# 3. 요약 결과를 저장할 파일 생성 및 표 헤더(Header) 작성
+SUMMARY_FILE="gffcompare_summary.tsv"
+echo -e "Program\tTranscript_Sn(%)\tTranscript_Sp(%)" > $SUMMARY_FILE
+
+echo "=========================================="
+echo "Starting gffcompare evaluation pipeline..."
+echo "=========================================="
+
+# 4. for문을 이용한 일괄 분석
+for GFF in "${GFF_FILES[@]}"; do
+    
+    # 파일명에서 확장자를 제외한 프로그램 이름만 추출 (예: braker4.gff3 -> braker4)
+    PROGRAM_NAME=$(basename "$GFF" .gff3)
+    # 이름이 너무 길어지는 것을 방지 (예: helixer_completed -> helixer)
+    PROGRAM_NAME=${PROGRAM_NAME/_completed/} 
+
+    echo "[Processing] $PROGRAM_NAME ..."
+
+    # gffcompare 실행 (-r 정답지, -o 출력명, 입력파일)
+    gffcompare -r $REF_GTF -o $PROGRAM_NAME $GFF
+
+    # .stats 파일에서 "Transcript level" 줄을 찾고, awk로 3번째(Sn)와 4번째(Sp) 숫자를 추출
+    SN_VAL=$(grep "Transcript level" ${PROGRAM_NAME}.stats | awk '{print $3}')
+    SP_VAL=$(grep "Transcript level" ${PROGRAM_NAME}.stats | awk '{print $4}')
+
+    # 추출한 값을 탭(\t)으로 구분하여 요약 파일에 한 줄씩 추가
+    echo -e "${PROGRAM_NAME}\t${SN_VAL}\t${SP_VAL}" >> $SUMMARY_FILE
+
+done
+
+echo "=========================================="
+echo "All evaluations are done! Here is your summary:"
+echo "=========================================="
+
+# 5. 터미널에 최종 요약표 출력
+cat $SUMMARY_FILE
+```
 
 # 분석 결과
