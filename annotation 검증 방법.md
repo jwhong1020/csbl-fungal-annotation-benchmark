@@ -24,6 +24,8 @@
 
 # 진행 과정 및 사용 코드 (수정 중)
 ## 패지키 설치 및 환경 조성
+각 프로그램들의 환경 이름은 star__env stringtie_env gffcompare_env 입니다. 프로그램 사용 전 환경을 바꿔주세요.
+
 ```bash
 # Bioconda 채널 우선순위 설정(생략 가능)
 conda config --add channels defaults
@@ -31,11 +33,13 @@ conda config --add channels bioconda
 conda config --add channels conda-forge
 conda config --set channel_priority strict #우선순위 적용 / 설치중 에러 방지
 
-#annotation compare 전용 환경 생성 및 패키지 일괄 설치
-conda create -n compare_env star stringtie gffcompare -y
+#annotation compare 각 프로그램별 전용 환경 생성 및 패키지 일괄 설치
+conda create -n star__env star -y
+conda create -n stringtie_env stringtie -y
+conda create -n gffcompare_env gffcompare -y
 
 #설치 확인 및 버전 테스트
-conda activate compare_env
+conda activate [사용할 환경]
 
 STAR --version
 stringtie --version
@@ -82,6 +86,45 @@ STAR --runThreadN 25 \
 mapping 이름 뒤에 붙은 번호들은 sample들 뒤에 붙어있는 숫자들을 오름차순으로 배열하였을때의 순서와 동일합니다.
 
 ## StringTie
+**1. 개별 BAM 파일 조립 (Assembly):**
+
+각 샘플의 BAM 파일을 독립적으로 조립합니다.
+
+7개의 BAM 파일을 각각 StringTie에 넣어서 7개의 개별 GTF 파일을 만듭니다. 이때, for문을 사용하여 한번에 처리합니다.
+```
+# 7개 샘플을 차례대로 조립하는 for문
+for i in {1..7}; do
+    echo "Assembling mapping${i} ..."
+    stringtie 경로_mapping${i}_Aligned.sortedByCoord.out.bam -p 32 -o 경로_sample${i}_assembly.gtf
+done
+```
+
+*완료되면 `sample1_assembly.gtf`부터 `sample7_assembly.gtf`까지 총 7개의 파일이 생성됩니다.*
+
+**2. 병합 리스트 파일(mergelist.txt) 만들기:**
+
+병합할 파일들의 목록을 작성합니다.
+
+StringTie에게 "어떤 파일들을 합칠지" 알려주기 위해, 방금 만든 7개의 GTF 파일 이름이 한 줄씩 적힌 텍스트 파일을 하나 만듭니다.
+
+```
+# 현재 폴더에 있는 모든 _assembly.gtf 파일 이름들을 mergelist.txt 안에 기록합니다.
+ls *_assembly.gtf > mergelist.txt
+```
+
+`cat mergelist.txt`를 쳐서 7개 파일 이름이 잘 들어가 있는지 확인합니다.
+
+**3. 최종 병합 (StringTie --merge):**
+
+목록에 있는 파일들을 하나의 최종 정답지로 합칩니다.
+
+`--merge` 옵션을 사용할 차례입니다. 앞서 만든 리스트 파일을 집어넣습니다.
+
+```
+stringtie --merge -p 32 -o stringtie_merged_evidence.gtf mergelist.txt
+```
+
+이 과정이 끝나면 생성되는 **`stringtie_merged_evidence.gtf`** 파일이 바로 7개 샘플의 발현 정보가 모두 깔끔하게 통합된 '단 하나의 궁극적인 정답지'가 됩니다.
 
 ## gffcompare
 
