@@ -59,7 +59,8 @@ STAR --runThreadN 25 \
 
 각 8개의 mapping된 `BAM`파일들은 `mapping 1~8`로 명명되었으며 `STAR_mapping_results` 파일에 넣어두었습니다.
 
-mapping 이름 뒤에 붙은 번호들은 sample들 뒤에 붙어있는 숫자들을 오름차순으로 배열하였을때의 순서와 동일합니다. 예시: `~1891`로 끝나는 샘플의 mapping 데이터는 `mapping1`입니다.
+mapping 이름 뒤에 붙은 번호들은 sample들 뒤에 붙어있는 숫자들을 오름차순으로 배열하였을때의 순서와 동일합니다. 
+- 예시: `~1891`로 끝나는 샘플의 mapping 데이터는 `mapping1`입니다.
 
 이 명명법은 이 후 과정을 for문으로 한번에 진행하기 위해 붙여졌습니다.
 
