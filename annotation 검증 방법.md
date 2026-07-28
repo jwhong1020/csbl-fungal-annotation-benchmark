@@ -44,7 +44,7 @@ gffcompare --version
 하단의 프로세스 진행시 `compare_env` 환경에서 진행하면 됩니다.
 
 ## STAR
-**1. 인덱스 생성**
+#### 1. 인덱스 생성
 ```bash
 # 1. 인덱스 생성 (한 번만 하면 됩니다)
 STAR --runThreadN 25 \
@@ -54,7 +54,7 @@ STAR --runThreadN 25 \
 ```
 `STAR_index` 폴더 안에 인덱스가 생성되었습니다. 이 인덱스는 polish 과정을 거치지 않은 데이터로 만든 것 입니다. 따라서 polish 이후 index를 다시 생성해야 한다면 다른 이름을 지정하고 여기에 기록으로 남겨주세요.
 
-**2. RNA-seq 데이터 매핑**
+#### 2. RNA-seq 데이터 매핑
 이제, 각 샘플 별 RNA_seq 데이터들을 이용하여 mapping을 진행합니다.
 
 각 8개의 mapping된 `BAM`파일들은 `mapping 1~8`로 명명되었으며 `STAR_mapping_results` 파일에 넣어두었습니다.
