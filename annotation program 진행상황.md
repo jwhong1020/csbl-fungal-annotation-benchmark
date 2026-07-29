@@ -10,5 +10,6 @@
 # Polished
 |Date|BRAKER4|FunGAP|EviANN|Helixer|Tiberius|ANNEVO|Remarks|
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-||||||||Download|
-|2026-07-28||X|||ab initio running|||
+|||X (error)|||||Download|
+|2026-07-28||X|Run (1hr 26min)||Ab initio run (24min), Run with evidence (59min)|||
+|2026-07-29|Running|X||||||
