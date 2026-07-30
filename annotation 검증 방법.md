@@ -61,30 +61,93 @@ STAR --runThreadN 25 \
 
 #### 2. RNA-seq 데이터 매핑
 이제, 각 샘플 별 RNA_seq 데이터들을 이용하여 mapping을 진행합니다.
+스크립트 작성 후 실행 권한을 주어야 돌아갑니다. (`chmod +x 스크립트이름.sh`) 
 
-각 8개의 mapping된 `BAM`파일들은 `mapping 1~8`로 명명되었으며 `STAR_mapping_results` 파일에 넣어두었습니다.
-
-mapping 이름 뒤에 붙은 번호들은 sample들 뒤에 붙어있는 숫자들을 오름차순으로 배열하였을때의 순서와 동일합니다. 
-- 예시: `~1891`로 끝나는 샘플의 mapping 데이터는 `mapping1`입니다.
-
-이 명명법은 이 후 과정을 for문으로 한번에 진행하기 위해 붙여졌습니다.
 
 ```bash
-# 2. RNA-seq 데이터 매핑 (Pair-end 데이터 기준)
-STAR --runThreadN 25 \
-     --genomeDir PATH_to-STAR_index/ \
-     --readFilesIn Sample_1.fq.gz Sample_2.fq.gz \
-     --readFilesCommand zcat \ #gz압축파일 읽어주는 명령어
-     --outSAMtype BAM SortedByCoordinate \
-     --outFileNamePrefix Path_to_STAR_mapping_results/mapping[숫자]_
+# 읽을 수 있는 파일 개수 늘리기
+ultimate -n 65535
 ```
-이제, 각 샘플 별 RNA_seq 데이터들을 이용하여 mapping을 진행합니다.
 
-각 8개의 mapping된 `BAM`파일들은 `mapping 1~8`로 명명되었으며 `STAR_mapping_results` 파일에 넣어두었습니다.
+**STAR 명령어(개별 파일 돌릴때)** 
 
-⇒ **수정: Sample_TN1806R1898 서열이 잘못되어 제외하고 진행. 데이터는 7개만 만들었습니다(mapping1~7).**
+```bash
+STAR --runThreadN 30 \
+     --genomeDir PATH-to/STAR_index/ \
+     --readFilesIn sample1_R1.fq,sample2_R1.fq\
+     --readFilesCommand zcat \
+     --outSAMtype BAM SortedByCoordinate \
+     --outSAMstrandField intronMotif
+     --outFileNamePrefix PATH-to/STAR_mapping_results/mapping[번호]_
+```
+
+**7개의 샘플의 STAR를 한번에 돌려주는 스크립트**
+
+```bash
+#!/bin/bash
+
+# 1. STAR 환경(star__env) 작동
+eval "$(conda shell.bash hook)"
+conda activate star__env
+# (만약 위 명령어로 환경이 안 켜지면 'source activate star__env' 로 수정해 주세요)
+
+# 2. 오픈 파일 개수 제한 해제 (이전 오류 완벽 방지)
+ulimit -n 65535
+
+# 3. 경로 설정 (현재 폴더를 기준으로 코드 최소화)
+RAW_DIR="PATH-to/01.RawData"
+INDEX_DIR="../STAR_index"  # 현재 폴더(STAR_mapping_results) 바로 옆에 있으므로 상대경로 사용
+
+echo "=========================================="
+echo "Starting STAR Mapping Pipeline (7 Samples)"
+echo "=========================================="
+
+# 4. 분석 대상 샘플 수집 (오류 샘플 제외 및 오름차순 정렬)
+# RAW_DIR 안의 Sample_ 폴더를 모두 찾되, grep -v 로 1898 샘플을 제외하고 sort로 정렬합니다.
+SAMPLE_DIRS=($(ls -d ${RAW_DIR}/Sample_* | grep -v "Sample_TN1806R1898" | sort))
+
+# 5. for문을 이용한 순차적 매핑
+COUNT=1
+for DIR in "${SAMPLE_DIRS[@]}"; do
+    # 폴더 이름에서 'Sample_'을 떼어내고 진짜 일련번호만 추출 (예: TN1806R1891)
+    SAMPLE_NAME=$(basename "$DIR" | sed 's/Sample_//')
+    
+    # 캡처본처럼 이름 뒤에 '--GATCAGAT' 같은 가변 문자열이 있을 수 있으므로 * 기호로 파일 탐색
+    R1_FILE=$(ls ${DIR}/*_1.fq.gz)
+    R2_FILE=$(ls ${DIR}/*_2.fq.gz)
+
+    echo " "
+    echo "[${COUNT}/7] Processing $SAMPLE_NAME ..."
+    echo "  - R1: $R1_FILE"
+    echo "  - R2: $R2_FILE"
+    
+    # STAR 실행
+    STAR --runThreadN 30 \
+         --genomeDir $INDEX_DIR \
+         --readFilesIn $R1_FILE $R2_FILE \
+         --readFilesCommand zcat \
+         --outSAMtype BAM SortedByCoordinate \
+         --outSAMstrandField intronMotif \
+         --outFileNamePrefix mapping${COUNT}_
+
+    # 카운트 증가
+    COUNT=$((COUNT+1))
+done
+
+echo "=========================================="
+echo "All mapping processes are successfully completed!"
+echo "=========================================="
+```
+
+
+각 7개의 mapping된 `BAM`파일들은 `mapping 1~7`로 명명되었으며 `STAR_mapping_results` 파일에 넣어두었습니다.
+
+⇒ **수정: Sample_TN1806R1898 서열이 잘못되어 제외하고 진행. 데이터는 7개만 만듦.**
 
 mapping 이름 뒤에 붙은 번호들은 sample들 뒤에 붙어있는 숫자들을 오름차순으로 배열하였을때의 순서와 동일합니다.
+
+⇒  `--outSAMstrandField intronMotif` 옵션 추가(07/29): 
+이 옵션을 넣고 매핑을 돌리시면, STAR가 잘려 나간 흔적(GT/AG 등)을 보고 스스로 `+`인지 `-`인지 판단해서 BAM 파일에 `XS` 꼬리표를 달아줍니다.
 
 ## StringTie
 **1. 개별 BAM 파일 조립 (Assembly):**
@@ -128,51 +191,81 @@ stringtie --merge -p 32 -o stringtie_merged_evidence.gtf mergelist.txt
 이 과정이 끝나면 생성되는 **`stringtie_merged_evidence.gtf`** 파일이 바로 7개 샘플의 발현 정보가 모두 깔끔하게 통합된 '단 하나의 궁극적인 정답지'가 됩니다.
 
 ## gffcompare
+#### 비교 데이터 생성 스크립트
+`bash` 파일로 생성. 구동은
 
 ```bash
 #!/bin/bash
 
 # 1. 기준이 되는 RNA-seq 정답지 (StringTie 결과물 경로 입력)
-REF_GTF="RNA_evidence_stringtie.gtf"
+REF_GTF="/panpyro/bravo/swkim/2019-nibr-biolum/Annotation_compare/StringTie/stringtie_merged_evidence.gtf"
 
-# 2. 평가할 6개 프로그램의 GFF3 파일 목록 배열 (실제 파일 경로로 수정)
+# 2. 평가할 6개 프로그램의 GFF3 파일 목록 배열
 GFF_FILES=(
-    "braker4.gff3"
-    "fungap.gff3"
-    "eviann.gff3"
-    "helixer_completed.gff3"
-    "tiberius.gff3"
-    "annevo.gff3"
+    "PATH-to/braker.gff3"
+    "PATH-to/eviann.gff"
+    "PATH-to/helixer.gff3"
+    "PATH-to/tiberius_abinitio.gff3"
+    "PATH-to/tiberius_evidence.gff3"
+    "PATH-to/annevo.gff3"
 )
 
-# 3. 요약 결과를 저장할 파일 생성 및 표 헤더(Header) 작성
-SUMMARY_FILE="gffcompare_summary.tsv"
-echo -e "Program\tTranscript_Sn(%)\tTranscript_Sp(%)" > $SUMMARY_FILE
+# 3. 요약 결과를 저장할 파일 생성 (12개 컬럼)
+SUMMARY_FILE="gffcompare_summary_all_levels.tsv"
+echo -e "Program\tBase_Sn\tBase_Sp\tExon_Sn\tExon_Sp\tIntron_Sn\tIntron_Sp\tIntChain_Sn\tIntChain_Sp\tTrans_Sn\tTrans_Sp\tLocus_Sn\tLocus_Sp" > $SUMMARY_FILE
 
 echo "=========================================="
-echo "Starting gffcompare evaluation pipeline..."
+echo "Starting FULL gffcompare evaluation..."
 echo "=========================================="
 
 # 4. for문을 이용한 일괄 분석
 for GFF in "${GFF_FILES[@]}"; do
-    
-    # 파일명에서 확장자를 제외한 프로그램 이름만 추출 (예: braker4.gff3 -> braker4)
-    PROGRAM_NAME=$(basename "$GFF" .gff3)
-    # 이름이 너무 길어지는 것을 방지 (예: helixer_completed -> helixer)
-    PROGRAM_NAME=${PROGRAM_NAME/_completed/} 
+    PROGRAM_NAME=$(basename "$GFF")
+    PROGRAM_NAME="${PROGRAM_NAME%.*}"
+    PROGRAM_NAME=${PROGRAM_NAME/_completed/}
 
     echo "[Processing] $PROGRAM_NAME ..."
 
-    # gffcompare 실행 (-r 정답지, -o 출력명, 입력파일)
+    if [ ! -f "$GFF" ]; then
+        echo "  -> ERROR: File not found!"
+        echo -e "${PROGRAM_NAME}\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-" >> $SUMMARY_FILE
+        continue
+    fi
+
+    # gffcompare 실행 (필요 시 임시 strand 변환 코드를 여기에 적용하세요)
     gffcompare -r $REF_GTF -o $PROGRAM_NAME $GFF
 
-    # .stats 파일에서 "Transcript level" 줄을 찾고, awk로 3번째(Sn)와 4번째(Sp) 숫자를 추출
-    SN_VAL=$(grep "Transcript level" ${PROGRAM_NAME}.stats | awk '{print $3}')
-    SP_VAL=$(grep "Transcript level" ${PROGRAM_NAME}.stats | awk '{print $4}')
-
-    # 추출한 값을 탭(\t)으로 구분하여 요약 파일에 한 줄씩 추가
-    echo -e "${PROGRAM_NAME}\t${SN_VAL}\t${SP_VAL}" >> $SUMMARY_FILE
-
+    if grep -q "Transcript level" ${PROGRAM_NAME}.stats; then
+        # 1. Base level ($3, $5)
+        BASE_SN=$(grep "Base level" ${PROGRAM_NAME}.stats | awk '{print $3}')
+        BASE_SP=$(grep "Base level" ${PROGRAM_NAME}.stats | awk '{print $5}')
+        
+        # 2. Exon level ($3, $5)
+        EXON_SN=$(grep "Exon level" ${PROGRAM_NAME}.stats | awk '{print $3}')
+        EXON_SP=$(grep "Exon level" ${PROGRAM_NAME}.stats | awk '{print $5}')
+        
+        # 3. Intron level ($3, $5)
+        INTRON_SN=$(grep "Intron level" ${PROGRAM_NAME}.stats | awk '{print $3}')
+        INTRON_SP=$(grep "Intron level" ${PROGRAM_NAME}.stats | awk '{print $5}')
+        
+        # 4. Intron chain level (단어가 3개라 위치가 $4, $6으로 한 칸씩 밀림)
+        CHAIN_SN=$(grep "Intron chain level" ${PROGRAM_NAME}.stats | awk '{print $4}')
+        CHAIN_SP=$(grep "Intron chain level" ${PROGRAM_NAME}.stats | awk '{print $6}')
+        
+        # 5. Transcript level ($3, $5)
+        TRANS_SN=$(grep "Transcript level" ${PROGRAM_NAME}.stats | awk '{print $3}')
+        TRANS_SP=$(grep "Transcript level" ${PROGRAM_NAME}.stats | awk '{print $5}')
+        
+        # 6. Locus level ($3, $5)
+        LOCUS_SN=$(grep "Locus level" ${PROGRAM_NAME}.stats | awk '{print $3}')
+        LOCUS_SP=$(grep "Locus level" ${PROGRAM_NAME}.stats | awk '{print $5}')
+        
+        # 탭(\t)으로 구분하여 한 줄로 출력
+        echo -e "${PROGRAM_NAME}\t${BASE_SN}\t${BASE_SP}\t${EXON_SN}\t${EXON_SP}\t${INTRON_SN}\t${INTRON_SP}\t${CHAIN_SN}\t${CHAIN_SP}\t${TRANS_SN}\t${TRANS_SP}\t${LOCUS_SN}\t${LOCUS_SP}" >> $SUMMARY_FILE
+    else
+        echo "  -> WARNING: No data evaluated."
+        echo -e "${PROGRAM_NAME}\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-" >> $SUMMARY_FILE
+    fi
 done
 
 echo "=========================================="
@@ -181,6 +274,13 @@ echo "=========================================="
 
 # 5. 터미널에 최종 요약표 출력
 cat $SUMMARY_FILE
+
 ```
 
 # 분석 결과
+
+
+
+
+
+
