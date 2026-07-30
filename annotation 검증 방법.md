@@ -278,6 +278,14 @@ cat $SUMMARY_FILE
 ```
 
 # 분석 결과
+Program	Base_Sn	Base_Sp	Exon_Sn	Exon_Sp	Intron_Sn	Intron_Sp	IntChain_Sn	IntChain_Sp	Trans_Sn	Trans_Sp	Locus_Sn	Locus_Sp
+braker	66.2	87.9	52.4	56.3	76.9	76.7	9.6	16.9	9.6	15.7	22.7	21.5
+eviann	56.6	94.6	47.8	82.1	59.3	94.7	17.2	41.4	17.2	40.3	35.6	54.7
+helixer	65.6	79.3	41.3	49.2	57.4	62.6	4.5	8.7	4.5	8.1	10.9	8.1
+tiberius_abinitio	52	85.1	40	60	59.4	80.4	7.3	17.2	7.2	16.1	17.4	16.1
+tiberius_evidence	52	85.1	40	60	59.4	80.4	7.3	17.2	7.2	16.1	17.4	16.1
+annevo	54	87	41	57.8	61.4	78.1	7	15.5	7	14.5	16.8	14.5
+<img width="1873" height="316" alt="image" src="https://github.com/user-attachments/assets/e1d53378-ef13-448e-b445-be649343d45d" />
 
 
 
