@@ -15,3 +15,11 @@
 |2026-07-29|Run(error)|X||||||
 |2026-07-30||X||Run(17.25min)||Run(12min)||
 
+# S.cerevisiae
+|Date|BRAKER4|FunGAP|EviANN|Helixer|Tiberius|ANNEVO|Remarks|
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|||X (error)|||||Download|
+|2026-08-03|||||Ab initio running|||
+|2026-08-04||||||||
+|2026-08-05||||||||
+
