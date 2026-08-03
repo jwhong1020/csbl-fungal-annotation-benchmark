@@ -19,7 +19,7 @@
 |Date|BRAKER4|FunGAP|EviANN|Helixer|Tiberius|ANNEVO|Remarks|
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |||X (error)|||||Download|
-|2026-08-03|||||Ab initio running|||
+|2026-08-03||||Run (17.25 min)|Ab initio run, Evidence running|Run (12 min 35 sec)||
 |2026-08-04||||||||
 |2026-08-05||||||||
 
